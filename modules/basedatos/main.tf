@@ -10,7 +10,7 @@ resource "aws_db_instance" "myinstance" {
   password               = var.password-bd
   parameter_group_name   = "default.mysql5.7"
   multi_az               = false
-  vpc_security_group_ids = [aws_security_group.sg-private.id]
+  vpc_security_group_ids = [var.SGprivado]
   db_subnet_group_name   = aws_db_subnet_group.mysqldb_subnetsprivate.name
   skip_final_snapshot    = true
   publicly_accessible    = false
@@ -23,5 +23,5 @@ resource "aws_db_instance" "myinstance" {
 resource "aws_db_subnet_group" "mysqldb_subnetsprivate" {
   name        = "mysqldb_subnetsprivate"
   description = "Private subnets for RDS instance"
-  subnet_ids  = ["${element(aws_subnet.private_1a_bootcamp.*.id,0)}","${element(aws_subnet.private_1a_bootcamp.*.id,1)}"]
+  subnet_ids  = ["${element(var.subnet-privates,0)}","${element(var.subnet-privates,1)}"]
 }

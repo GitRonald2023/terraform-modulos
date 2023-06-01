@@ -24,6 +24,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
 }
 #Asignacion del archivo .tfstate de terraform al bucket
 #terraform {
+#  depends_on = [aws_s3_bucket.terraform_state_bucket]
 #  backend "s3" {
 #    bucket         = "cloudcamp-terraform-state-proy-final"
 #    key            = "stage-cloudcamp/terraform.tfstate"

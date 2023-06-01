@@ -11,6 +11,8 @@ Balanceador de aplicaciones (subnets publicas con visibilidad desde internet)
 Base de datos RDS-MySQL (subnets privadas)
 EFS para informacion permanente (subnet privada)
 
+Se realiza con MODULOS
+
 El objetivo es manejar estado remoto de terrafor (en bucket-s3) con estado de bloqueo en BD dynamo, 
 por ello despues de realizar el primer despliegue se "descomentaria" la seccion 'terraform {backend s3}' 
 para que se actualice la configuración de estado de Terraform
