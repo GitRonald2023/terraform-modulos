@@ -16,7 +16,7 @@ node ("Jenkins-Pipeline"){
         
         withCredentials([[
             $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: "credentials-id-here",
+            credentialsId: "aws-credentials",
             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) 
