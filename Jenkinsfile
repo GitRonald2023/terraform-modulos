@@ -13,7 +13,17 @@ node ("Jenkins-Pipeline"){
             terraform validate'''
     }
     stage ('Plan'){
-        sh 'terraform plan'
+        
+        withCredentials([[
+            $class: 'AmazonWebServicesCredentialsBinding',
+            credentialsId: "credentials-id-here",
+            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        ]]) 
+        {
+            sh 'terraform plan'    
+        }
+    
     }
     stage ('Clean'){
         cleanWs()
