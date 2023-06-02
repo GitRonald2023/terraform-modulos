@@ -12,5 +12,8 @@ node ("Jenkins-Pipeline"){
         sh '''terraform fmt
             terraform validate'''
     }
+    stage ('Clean'){
+        cleanWs()
+    }
     sh "ls"
 }
