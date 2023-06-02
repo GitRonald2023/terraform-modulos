@@ -7,8 +7,9 @@ terraform {
   }
 }
 #uso el perfil "default" de aws credentials
-#provider "aws" {
-#  profile = "default"
-#}
+provider "aws" {
+  region = "us-east-1"
+  #  profile = "default"
+}
 
 
