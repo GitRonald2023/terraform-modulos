@@ -8,8 +8,9 @@ node ("Jenkins-Pipeline"){
     stage ('Init'){
         sh 'terraform init'
     }
-    stage('Build') {
-        echo "Build Gradle App"
+    state ('Validate'){
+        sh '''terraform fmt
+            terraform validate'''
     }
     sh "ls"
 }
