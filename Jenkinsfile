@@ -19,10 +19,7 @@ node ("Jenkins-Pipeline"){
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) 
         {
-            stage ('Plan'){
-                        
-                sh 'terraform plan -out tfplan'     
-            }
+            
             
             
             stage ('Destroy'){
