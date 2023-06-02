@@ -26,7 +26,7 @@ node ("Jenkins-Pipeline"){
             
             
             stage ('Destroy'){
-                sh "terraform destroy"
+                sh "terraform destroy -y"
             }
         }
     stage ('Clean'){
