@@ -21,7 +21,7 @@ node ("Jenkins-Pipeline"){
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) 
         {
-            sh 'terraform plan'    
+            sh 'terraform plan -out tfplan'     
         }
     
     }
