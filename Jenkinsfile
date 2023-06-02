@@ -26,6 +26,9 @@ node ("Jenkins-Pipeline"){
             stage ('Apply') {
                 sh "terraform apply 'tfplan'"
             }
+            stage ('Destroy'){
+                sh "terraform destroy 'tfplan'"
+            }
         }
     stage ('Clean'){
         cleanWs()
