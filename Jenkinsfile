@@ -8,7 +8,7 @@ node ("Jenkins-Pipeline"){
     stage ('Init'){
         sh 'terraform init'
     }
-    state ('Validate'){
+    stage ('Validate'){
         sh '''terraform fmt
             terraform validate'''
     }
