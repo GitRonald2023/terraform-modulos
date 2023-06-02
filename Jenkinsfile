@@ -23,9 +23,8 @@ node ("Jenkins-Pipeline"){
                         
                 sh 'terraform plan -out tfplan'     
             }
-            stage ('Apply') {
-                sh "terraform apply 'tfplan'"
-            }
+            
+            
             stage ('Destroy'){
                 sh "terraform destroy 'tfplan'"
             }
