@@ -12,21 +12,22 @@ node ("Jenkins-Pipeline"){
         sh '''terraform fmt
             terraform validate'''
     }
-    stage ('Plan'){
-        
-        withCredentials([[
+    withCredentials([[
             $class: 'AmazonWebServicesCredentialsBinding',
             credentialsId: "aws-credentials",
             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) 
         {
-            sh 'terraform plan -out tfplan'     
+            stage ('Plan'){
+                        
+                sh 'terraform plan -out tfplan'     
+            }
+            stage ('Apply') {
+                sh "terraform apply 'tfplan'"
+            }
         }
-    
-    }
     stage ('Clean'){
         cleanWs()
     }
-    sh "ls"
 }
