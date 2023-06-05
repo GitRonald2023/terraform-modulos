@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-
+properties([parameters([choice(choices: ['apply', 'destroy'], name: 'action')]), pipelineTriggers([GenericTrigger(causeString: 'Generic Cause', regexpFilterExpression: '', regexpFilterText: '', token: 'terraform-pipeline', tokenCredentialId: '')])])
 node ("Jenkins-Pipeline"){
     echo "Hello, World"
     stage ('Checkout'){
@@ -19,9 +19,12 @@ node ("Jenkins-Pipeline"){
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) 
         {
-            
-            
-            
+            stage ('Plan'){        
+                sh 'terraform plan -out tfplan'     
+            }
+            stage ('Apply') {
+                sh "terraform apply 'tfplan'"
+                } 
             stage ('Destroy'){
                 sh "terraform destroy"
             }
