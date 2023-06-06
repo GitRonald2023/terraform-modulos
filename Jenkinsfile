@@ -24,7 +24,7 @@ node ("Jenkins-Pipeline"){
             }
             if (params.destroy){
                 stage ('Destroy'){
-                    sh "terraform destroy 'tfplan'"
+                    sh "terraform destroy -auto-approve"
                 }
             }
             else {
