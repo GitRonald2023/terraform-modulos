@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-properties([parameters([choice(choices: ['apply', 'destroy'], name: 'action')]), pipelineTriggers([GenericTrigger(causeString: 'Generic Cause', regexpFilterExpression: '', regexpFilterText: '', token: 'terraform-pipeline', tokenCredentialId: '')])])
+properties([parameters([booleanParam(defaultValue: false, name: 'destroy')]), pipelineTriggers([GenericTrigger(causeString: 'Generic Cause', regexpFilterExpression: '', regexpFilterText: '', token: 'terraform-pipeline', tokenCredentialId: '')])])
 node ("Jenkins-Pipeline"){
     echo "Hello, World"
     stage ('Checkout'){
@@ -22,11 +22,15 @@ node ("Jenkins-Pipeline"){
             stage ('Plan'){        
                 sh 'terraform plan -out tfplan'     
             }
-            stage ('Apply') {
-                sh "terraform apply 'tfplan'"
-                } 
-            stage ('Destroy'){
-                sh "terraform destroy"
+            if (params.destroy){
+                stage ('Destroy'){
+                    sh "terraform destroy"
+                }
+            }
+            else {
+                stage ('Apply') {
+                    sh "terraform apply 'tfplan'"
+                }    
             }
         }
     stage ('Clean'){
